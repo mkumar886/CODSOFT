@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <style>
+ a {
+  position: relative;
+  color: #fff1f1;
+  text-decoration: none;
+}
+
+a:hover {
+  color:inherit;
+}
+
+a::before {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 2px;
+  bottom: 0;
+  left: 0;
+  background-color: #d6d6d6;
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+a:hover::before {
+  transform: scaleX(1);
+}
+       
+       *{
+            font-family:Arial, Helvetica, sans-serif;
+        }
+        article{
+            background-color:  #0d1117;  
+        }
+        header{
+            background-color:  #0d1117;
+        }
+        a {
+            text-decoration: none;
+            color: white;
+        }
+        #nav1{
+            background-color: #0d1117;
+            
+        } 
+        span:focus:active{
+             
+  background-color: #1a1f24;
+  outline: none;
+}
+span::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: -10px;
+  width: 5px;
+  height: 80%;
+  background-color: #2f81f7;
+  border-radius: 5px;
+  opacity: 0;
+}
+body{
+    background-color: #1a1f24;
+}         
+
+  
+span{ 
+background-color: transparent;
+border: none;
+padding: 10px;
+color: white;
+position: relative;
+gap: 5px;
+cursor: pointer;
+border-radius: 4px;
+
+}
+span:hover{
+  background-color: #21262c;
+}
+span:focus::before,
+span:active::before {
+  opacity: 1;
+}
+#title{
+    animation-name: Title;
+}
+ .card{
+border-radius:20px ;
+background-color: #0d1117;
+color: white;
+animation-name: blurInLeft;
+
+ }
+@keyframes blurInLeft {
+    from {
+        transform: translateX(100%);
+        filter: blur(20px);
+        opacity: 0;
+    }
+}
+.card:hover{
+    -webkit-box-shadow: 1px 5px 23px -3px rgba(44,15,158,1);
+-moz-box-shadow: 1px 5px 23px -3px rgba(44,15,158,1);
+box-shadow: 1px 5px 23px -3px rgba(44,15,158,1);
+}
+  
+    </style>
+    <script type="text/javascript">
+    function loadcategories() {
+        fetch("https://fakestoreapi.com/products/categories")
+            .then(function(res) {
+                return res.json();
+            })
+            .then(function(categories) {
+                categories.unshift("ALL")
+                categories.map(function(category) {
+                    var option = document.createElement("option");
+                    option.text = category.toUpperCase();
+                    option.value = category;
+                    document.getElementById("lstcategories").appendChild(option);
+                })
+            })
+    }
+
+    function loadproducts(url) {
+        document.querySelector("main").innerHTML = "";
+        fetch(url)
+            .then(function(res) {
+                return res.json();
+            })
+            .then(function(products) {
+                products.map(function(product) {
+                    var div = document.createElement("div");
+                    div.className = "card m-2 p-2";
+                    div.style.width = "200px";
+                    div.innerHTML = `
+                     <img src=${product.image} class="card-img-top" height="150">
+                     <div class="card-header mt-2" style="height:80px;overflow:auto">${product.title}</div>
+                     <div class="card-body">
+                        <dl>
+                            <dt>Price</dt>
+                            <dd>${product.price}</dd>
+                            <dt>Rating</dt>
+                            <dd>${product.rating.rate}<label class="bi bi-star-fill text-secondary"></label>[${product.rating.count}]</dd>
+                        </dl>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-dark w-100" onclick="AddToCartClick(${product.id})">
+                            <label class="bi bi-cart4" id="add"> Add to Cart</label>
+                        </button>
+                    </div>`;
+                    document.querySelector("main").appendChild(div);
+                })
+            })
+    }
+
+    function categorychanged() {
+        var categoryname = document.getElementById("lstcategories").value;
+        if (categoryname == "ALL") {
+            loadproducts("https://fakestoreapi.com/products");
+        } else {
+            loadproducts(`https://fakestoreapi.com/products/category/${categoryname}`)
+        }
+    }
+
+    var cartitems = [];
+
+    function cartitemscount() {
+        document.getElementById("lblcount").innerHTML = cartitems.length;
+    }
+
+    function AddToCartClick(id) {
+        fetch(`https://fakestoreapi.com/products/${id}`)
+            .then(function(res) {
+                return res.json();
+                
+            })
+            .then(function(product) {
+            const userConfirmed = confirm(`${product.title}\nAdded to Cart`);
+            if (userConfirmed) {
+                cartitems.push(product);
+                cartitemscount();
+            }
+            })
+    }
+
+    function ShowCartClick() {
+    document.getElementById("cartBody").innerHTML = "";
+    var totalbill = 0;
+
+    cartitems.map(function(item) {
+        var tr = document.createElement("tr");
+        var tdTitle = document.createElement("td");
+        var tdPrice = document.createElement("td");
+        var tdPreview = document.createElement("td");
+
+        tdTitle.innerHTML = item.title;
+        tdPrice.innerHTML = item.price;
+        tdPreview.innerHTML = `<img src=${item.image} width="50" height="50">`;
+
+        tr.appendChild(tdTitle);
+        tr.appendChild(tdPrice);
+        tr.appendChild(tdPreview);
+
+        document.getElementById("cartBody").appendChild(tr);
+        totalbill += item.price;
+    });
+
+    document.getElementById("totalbill").innerHTML = `Total bill: ${totalbill.toLocaleString("en-IN",{style:"currency",currency:"INR"})}`;
+}
+
+  
+    function bodyload() {
+        loadcategories();
+        loadproducts("https://fakestoreapi.com/products");
+        cartitemscount();
+    }
+    
+    </script>
+</head>
+<body class="container-fluid" onload="bodyload()">
+    <header class="d-flex justify-content-evenly p-3 text-white">
+        <div class="h3" id="title"><a href="">FakeStore</a></div>
+        <nav class="fs-4" id="nav1">
+            <a href="javascript:loadproducts('https://fakestoreapi.com/products');" class="me-0"><span>Home</span></a>
+            <a href="javascript:loadproducts('https://fakestoreapi.com/products/category/electronics');" class="me-0"><span>Electronics</span></a>
+            <a href="javascript:loadproducts('https://fakestoreapi.com/products/category/jewellery');" class="me-0"><span>Jewelery</span></a>
+            <a href="javascript:loadproducts(`https://fakestoreapi.com/products/category/men's clothing`);" class="me-0"><span>Men's Fashion</span></a>
+            <a href="javascript:loadproducts(`https://fakestoreapi.com/products/category/women's clothing`);" class="me-0"><span>Women's Fashion</span></a>
+        </nav>
+        <div>
+            <button id="effect" data-bs-target="#cart" data-bs-toggle="modal" onclick="ShowCartClick()" class="position-relative btn btn-warning bi bi-cart2">
+                Your Cart<span id="lblcount" class="badge rounded-circle bg-danger text-white position-absolute"></span>
+            </button>
+            <div class="modal fade" id="cart">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h2 class="text-warning">Your Cart</h2>
+                            <button class="btn btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Price</th>
+                                        <th>Preview</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cartBody">
+                                    <!-- Cart items will be added here -->
+                                </tbody>
+                                <tfoot style="text-align: center;">
+                                    <tr>
+                                        <td  colspan="3" id="totalbill">Total bill: $0.00</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+           
+        </div>
+    </header>
+    <article class=" text-white p-2 mt-0 text-center">
+        <marquee direction="right" scrollamount="10" loop="2">
+         <label class="bi bi-lightning-fill text-warning"><span>HOLIDAY DEALS 50% OFF - LIMITED OFFER</span><label class="bi bi-lightning-fill text-warning"></label >
+        </marquee>
+    </article>
+    <section class="mt-3 row">
+        <nav class="col-2">
+            <div>
+                <label class="form-label fw-bold text-white">Select Category</label>
+                <div>
+                    <select class="form-select" id="lstcategories" onchange="categorychanged()"></select>
+                </div>
+            </div>
+        </nav>
+        <main class="col-10 d-flex flex-wrap" style="overflow:auto;height:450px"></main>
+    </section>
+    <footer style="background-color: #0d1117;" class=" text-white py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <h5 class="text-warning">Get to Know Us</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Careers</a></li>
+                        <li><a href="#" class="text-white">Blog</a></li>
+                        <li><a href="#" class="text-white">About Us</a></li>
+                        <li><a href="#" class="text-white">Investor Relations</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="text-warning">Make Money with Us</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Sell on FakeStore</a></li>
+                        <li><a href="#" class="text-white">Affiliate Program</a></li>
+                        <li><a href="#" class="text-white">Fulfillment by FakeStore</a></li>
+                        <li><a href="#" class="text-white">Advertise Your Products</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="text-warning">Let Us Help You</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Your Account</a></li>
+                        <li><a href="#" class="text-white">Your Orders</a></li>
+                        <li><a href="#" class="text-white">Shipping Rates & Policies</a></li>
+                        <li><a href="#" class="text-white">Returns & Replacements</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5 class="text-warning">Contact Us</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Help</a></li>
+                        <li><a href="#" class="text-white">Customer Service</a></li>
+                        <li><a href="#" class="text-white">Order Tracking</a></li>
+                        <li><a href="#" class="text-white">Feedback</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <p>&copy; 2024 FakeStore. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="../node_modules/jquery/dist/jquery.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+</body>
+</html>

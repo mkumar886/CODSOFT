@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+ 
+    <style>
+        .container {
+            display: grid;
+            grid-template-columns: 11fr 1fr;
+            background: radial-gradient(circle, rgba(1, 49, 110, 0.9) 0%, rgba(0, 0, 0, 0.969625350140056) 100%);
+            height: 100vh;
+            max-width: max-content;
+
+        }
+
+        #items {
+            margin-top: 100px;
+            margin-left: 150px;
+
+        }
+        input{
+            border: none;
+        }
+
+        p {
+            font-size: 30px;
+            color: whitesmoke;
+            width: max-content;
+        }
+
+        .container-lg {
+            display: grid;
+            grid-template-columns: 6fr 6fr;
+
+
+        }
+
+        #table-specs {
+            border-collapse: separate;
+            width: 100%;
+        }
+
+        td {
+            padding: 10px;
+        }
+        #specs{
+            display: flex;
+
+        }
+        marquee img{
+            border-radius: 20px;
+            width: 350px;
+        }
+        #buy-now{
+            background-color: rgba(173, 216, 230, 0.5);
+            display: flex;
+            justify-content: space-evenly;
+            
+            
+        }
+        #payment{
+            width:80px
+            
+        }
+        #footers {
+            display:flex;
+            justify-content: space-around;
+            background-color: rgb(0,9,21);
+           
+        }
+        #footers h2{
+            color: whitesmoke;
+        }
+        footer{
+            background-color: rgb(0,9,21);
+            text-align: center;
+            color: whitesmoke;
+        }
+        #author:hover{
+            color: rgb(46, 4, 162);
+        }
+        a{
+            text-decoration: none;
+            color:whitesmoke
+        }
+        #contacts{
+            color:whitesmoke;
+        }
+        #contacts a:hover{
+            color: rgb(46, 4, 162);
+        }
+       
+      
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div id="items">
+            <p>Make your moments fly with</p>
+            <h1 style="color: whitesmoke;">ProDrone 2.0</h1>
+            <button class="btn btn-primary"><a href="#video">Watch video</a><span class="bi bi-play-fill"></span></button>
+            <button class="btn btn-light">Learn more <span class="bi bi-arrow-right"></span></button>
+            <br><br>
+            <div class="carousel slide" id="top" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="../public/images/1drone.PNG" class="w-100 d-block" data-bs-interval="3000" alt="Drone 1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../public/images/2drone.png" class="w-100 d-block" alt="Drone 2">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="../public/images/3drone.png" class="w-100 d-block" data-bs-interval="3000" alt="Drone 3">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" data-bs-slide="prev" data-bs-target="#top">
+                    <span class="carousel-control-prev-icon"></span>
+                </button>
+                <button class="carousel-control-next" data-bs-slide="next" data-bs-target="#top">
+                    <span class="carousel-control-next-icon"></span>
+                </button>
+                <div class="carousel-indicators">
+                    <button class="active" data-bs-slide-to="0" data-bs-target="#top"></button>
+                    <button data-bs-slide-to="1" data-bs-target="#top"></button>
+                    <button data-bs-slide-to="2" data-bs-target="#top"></button>
+                </div>
+            </div>
+        </div>
+        <div>
+            <img src="../public/images/pngwing.com.png" width="800px" height="600px" alt="DJI MINI 3 PRO">
+        </div>
+
+    </div>
+    <section class="mt-3">
+        <div class="container-lg mt-5 mb-5">
+            <div>
+                <h2>Shoot like a pro with our new easy to use <span style="color: blueviolet;">DJI MINI 3 PRO</span></h2>
+            </div>
+            <div style="font-size: 20px;">
+                Featuring a 1-inch CMOS sensor that can shoot 4K/60fps videos and 20MP photos, DJI MINI 3 PRO grants
+                filmmakers absolute creative freedom. It carefully optimizes user experience and intelligent features.
+
+
+            </div>
+        </div>
+        <div align="center">
+            <iframe width="82%" height="500px" src="https://www.youtube.com/embed/aOwTUgqUfH8" frameborder="0" controls
+                poster="../public/poster.jpg" id="video"></iframe>
+        </div>
+        <caption>
+            <h1 align="center" class="mt-5">The benefits of world-changing drone</h1>
+        </caption>
+        <table width="100%" border="0" class="mt-5" id="table-specs">
+
+            <tbody align="center">
+                <tr>
+                    <td><img src="../public/images/1d.png" alt="Image 1"></td>
+                    <td rowspan="4" colspan="3"><img src="../public/images/main.png" width="500px" height="250px"
+                            alt="Main Image"></td>
+                    <td><img src="../public/images/2d.png" alt="Image 2"></td>
+                </tr>
+                <tr>
+                    <td>Flight time <h4 style="margin-top: -1px;">60 min</h4>
+                    </td>
+                    <td>Optical camera <h4 style="margin-top: -1px;">2x zoom</h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td><img src="../public/images/3d.png" alt="Image 3"></td>
+                    <td><img src="../public/images/4d.png" alt="Image 4"></td>
+                </tr>
+                <tr>
+                    <td>Obstacle sensing <h4 style="margin-top: -1px;">5-Direction</h4>
+                    </td>
+                    <td>Sensor <h4 style="margin-top: -1px;">1 inch</h4>
+                    </td>
+                </tr>
+                <tr>
+                    <td><img src="../public/images/5d.png" alt="Image 5"></td>
+                    <td colspan="2"><img src="../public/images/6d.png" alt="Image 6"></td>
+                    <td><img src="../public/images/7d.png" alt="Image 7"></td>
+                    <td><img src="../public/images/8d.png" alt="Image 8"></td>
+                </tr>
+                <tr style="font-size: larger;">
+                    <td>Ultra-clear video <h4 style="margin-top: -1px;">4K</h4>
+                    </td>
+                    <td colspan="2">Working temperature <h4 style="margin-top: -1px;">-10°C to 40°C</h4>
+                    </td>
+                    <td>For night time <h4 style="margin-top: -1px;">LED searchlight</h4>
+                    </td>
+                    <td>Noise reduction <h4 style="margin-top: -1px;">4db</h4>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <hr>
+        <div>
+            <h1 align="center">User shots gallery</h1><br><br>
+            <marquee scrollamount="10" behavior="scroll" direction="left" onmouseover="this.stop()" onmouseout="this.start()">
+                <img src="../public/images/c1.png">&nbsp;&nbsp;
+                <img src="../public/images/c2.png">&nbsp;&nbsp;
+                <img src="../public/images/c4.png">&nbsp;&nbsp;
+                <img src="../public/images/c1.png">&nbsp;&nbsp;
+                <img src="../public/images/c2.png">&nbsp;&nbsp;
+                <img src="../public/images/c4.png">&nbsp;&nbsp;
+
+            </marquee>
+            <br><br>
+            <marquee scrollamount="10" behavior="scroll" direction="right" onmouseover="this.stop()" onmouseout="this.start()">
+                <img src="../public/images/c5.png">&nbsp;&nbsp;
+                <img src="../public/images/c6.png">&nbsp;&nbsp;
+                <img src="../public/images/c7.png">&nbsp;&nbsp;
+                <img src="../public/images/c5.png">&nbsp;&nbsp;
+                <img src="../public/images/c6.png">&nbsp;&nbsp;
+                <img src="../public/images/c7.png">&nbsp;&nbsp;
+
+            </marquee>
+        </div>
+        <hr>
+        <!-- specs -->
+        <div id="specs">
+
+            <table height="900px" align="center" style="font-size: 15px; width: 90%;">
+
+                <thead>
+                    <tr>
+                        <th colspan="3"><h1>Specs</h1></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><b>Weight (Battery & Propellers Included)</b></td>
+                        <td>1400 g</td>
+                        <td rowspan="2" align="center" style="padding-left: 100px;"> 
+                            <img src="../public/images/11d.png">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Max Flight Time</b></td>
+                        <td>Approx. 60 minutes</td>
+                    </tr>
+                    <tr>
+                        <td><b>Vision System</b></td>
+                        <td>
+                            Forward Vision System<br>
+                            Backward Vision System<br>
+                            Downward Vision System
+                        </td>
+                        <td rowspan="2" align="center" style="padding-left: 100px;">
+                            <img src="../public/images/12.png">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Obstacle Sensing</b></td>
+                        <td>Front & Rear Obstacle Avoidance<br>
+                            Left & Right Infrared Obstacle Avoidance
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Camera Sensor</b></td>
+                        <td>1" CMOS<br>
+                            Effective pixels: 20 M
+                        </td>
+                        <td rowspan="2" align="center" style="padding-left: 100px;">
+                            <img src="../public/images/13d.png">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Max. Video Recording Resolution</b></td>
+                        <td>4K 60P</td>
+                    </tr>
+                    <tr>
+                        <td><b>Video Transmission System</b></td>
+                        <td>Lightbridge</td>
+                        <td rowspan="2" align="center" style="padding-left: 100px;"> 
+                            <img src="../public/images/14d.png">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><b>Operating Frequency</b></td>
+                        <td>2.4 GHz/5.8 GHz</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </div>
+        <br><br><br>
+       <div id="buy-now">
+            <div class="mt-5">
+               <h1>Two colors.<br>Choose your best.</h1><br><br>
+               <p style="font-size: 25px; color: gray;">“ProDrone 2.0 changes the rules of the game in aerial <br>photography. Now you can capture more details from a <br>safe distance, as well as implement different visual <br>effects with different focal lengths.”</p>
+            <h3>Wade Warren</h3>
+                <p style="font-size:large; color: gray;">ProDrone Inc. Co-Owner</p>
+            
+            </div>
+            <div class="d-flex mt-5 style="margin-left: 100px;">
+                <div class="card me-4 mb-5">
+                    <div class="card-header card-img-top">
+                        <img src="../public/images/d1.png" height="150px">
+
+                    </div>
+                    <div class="card-body" style="text-align: center;">
+                        <p class="text-dark">White ProDrone 2.0</p><br>
+                        <h2  style="margin-top: -25px;">&#8377 1100</h2><br>
+                        <p class="btn btn-primary bi bi-cart4" onclick="buyProduct('White ProDrone 2.0', 1100)"> Buy Now</p>
+
+                    </div>
+                    
+
+                </div>
+                <div class="card mb-5">
+                    <div class="card-header card-img-top">
+                        <img src="../public/images/d2.png" height="150px">
+
+                    </div>
+                    <div class="card-body"  style="text-align: center;">
+                        <p class="text-dark">Black ProDrone 2.0</p><br>
+                        <h2 style="margin-top: -25px;">&#8377 1500</h2><br>
+                        <p class="btn btn-primary bi bi-cart4" onclick="buyProduct('Black ProDrone 2.0', 1500)"> Buy Now</p>
+
+                        
+                    </div>
+                   
+                       
+                    
+
+                </div>
+            </div>
+        </div>
+        <div id="footers">
+            <div class="mt-4">
+                <h2>Newsletter</h2><br>
+                <p style="font-size: 15px; color: white;">Please, subscribe to our newsletter to keep updated <br>about our news and offers.</p><br><br>
+               <span class="bi bi-envelope"><input type="email"  style=" background-color: rgb(0,9,21); " name="email" placeholder="Your mail"><button class="btn btn-primary border-0">Subscribe</button></span>
+               
+    
+    
+            </div>
+            <div id="contacts" class="mt-4">
+                <h2>Our office</h2><br>
+                <span class="bi bi-geo-alt" ><a href="">5317 w.Gray St.Utica,Thailand 8904.</a></span><br>
+                <span class="bi bi-telephone" >  <a href="tel:(406) 555-0120">(406) 555-0120</a></span><br>
+                <spam class="bi bi-envelope" >  <a href="mailto:email@example.com">email@example.com</a></spam>
+            </div>
+            <div class="mt-4">
+                <h2>Payments accepted</h2>
+                <br>
+                <button id="payment" class="btn btn-outline-primary"><i>Visa</i></button> <button id="payment"  class="btn btn-outline-primary"><i class="bi bi-credit-card"></i></button> <button id="payment"  class="btn btn-outline-primary"><i>PayPal</i></button> 
+            </div>
+        </div>
+        
+    </section>
+    <footer>
+        <br>
+        &copy All rights reserved. Made by <span id="author">Manish Creator</span>
+        <br>
+    </footer>
+   
+
+
+
+</body>
+<script>
+    function buyProduct(productName, productPrice) {
+        
+        confirm('You have selected ' + productName + ' for ₹' + productPrice + '. Proceeding to checkout...');
+      
+    }
+</script>
+
+</html>

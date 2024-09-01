@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <style type="text/css">
+        #color{
+            color: rgba(255, 72, 0, 0.979);
+            
+        }
+        body {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+           background-color: rgba(0, 0, 0, 0.9);
+            
+        }
+        .calculator {
+            border: 1px solid rgba(0, 0, 0, 0.459);
+            border-radius: 15px;
+            padding: 20px;
+            background: rgb(23,23,24);
+            background: linear-gradient(90deg, rgba(23,23,24,1) -6%, rgba(0,0,0,1) 100%);
+            
+            
+
+        }
+         .calculator:hover{
+            -webkit-box-shadow:0px 0px 44px 15px rgba(16,9,56,0.41);
+        -moz-box-shadow: 0px 0px 44px 15px rgba(16,9,56,0.41);
+         box-shadow: 0px 0px 44px 15px rgba(16,9,56,0.41);
+        }
+        input {
+            border: none;
+            width: 283px;
+            height: 70px;
+            
+            padding: 10px;
+            text-align: right;
+            font-size: 20px;
+        }
+        button {
+            border: none;
+            color: white;
+            border: none;
+            height: 60px;
+            width: 60px;
+            margin: 5px;
+            font-size: larger;
+            border-radius: 25px;
+            background: rgb(23,23,24);
+            background: linear-gradient(90deg, rgba(23,23,24,1) 100%, rgba(0,0,0,1) 100%);
+        }
+        button:hover{
+            -webkit-box-shadow:0px 0px 10px 0px rgba(255,255,255,0.85);
+-moz-box-shadow: 0px 0px 10px 0px rgba(255,255,255,0.85);
+box-shadow: 0px 0px 10px 0px rgba(255,255,255,0.85);
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="display" readonly class="form-control fw-bold">
+        <div>
+            <button onclick="clearDisplay()" id="color">C</button>
+            <button onclick="deleteLast()" id="color" class="bi bi-box-arrow-left"></button>
+            <button onclick="appendToDisplay('%')" id="color">%</button>
+            <button onclick="appendToDisplay('/')" id="color">/</button>
+        </div>
+        <div>
+            <button onclick="appendToDisplay('7')">7</button>
+            <button onclick="appendToDisplay('8')">8</button>
+            <button onclick="appendToDisplay('9')">9</button>
+            <button onclick="appendToDisplay('*')" id="color">*</button>
+        </div>
+        <div>
+            <button onclick="appendToDisplay('4')">4</button>
+            <button onclick="appendToDisplay('5')">5</button>
+            <button onclick="appendToDisplay('6')">6</button>
+            <button onclick="appendToDisplay('-')" id="color">-</button>
+        </div>
+        <div>
+            <button onclick="appendToDisplay('1')">1</button>
+            <button onclick="appendToDisplay('2')">2</button>
+            <button onclick="appendToDisplay('3')">3</button>
+            <button onclick="appendToDisplay('+')" id="color">+</button>
+        </div>
+        <div>
+            <button style="width: 135px;" onclick="appendToDisplay('0')">0</button>
+            <button onclick="appendToDisplay('.')">.</button>
+            <button onclick="calculate()" id="color">=</button>
+        </div>
+    </div>
+    <script>
+        let display = document.getElementById("display");
+
+        function appendToDisplay(input) {
+            display.value += input;
+        }
+
+        function clearDisplay() {
+            display.value = "";
+        }
+
+        function calculate() {
+        try {
+        let expression = display.value.replace(/%/, '/100');
+        display.value = eval(expression);
+        } 
+        catch {
+        display.value = "Error";
+        }
+    }
+        function deleteLast() {
+            display.value = display.value.slice(0, -1);
+        }
+    </script>
+</body>
+</html>
+
+
+
+
