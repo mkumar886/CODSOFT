@@ -539,6 +539,7 @@ window.onload = async () => {
     let stream;
     let userGender = '';
     let detectionGender = '';
+    const cart = [];
 
     async function loadModels() {
       const MODEL_URL = 'https://cdn.jsdelivr.net/gh/cgarciagl/face-api.js@master/weights';
@@ -637,6 +638,67 @@ function closePopup() {
       return shuffled.slice(0, count);
     }
 
+ document.querySelectorAll('.card-button').forEach(button => {
+    button.addEventListener('click', function () {
+      const card = this.closest('.card');
+      const productName = card.querySelector('.text-title').textContent;
+      const priceText = this.textContent.match(/\d+/g);
+      const productPrice = priceText ? parseInt(priceText.join("")) : 0;
+
+      cart.push({ name: productName, price: productPrice });
+
+      updateCartBadge();
+      updateBillTable();
+
+      alert(`${productName} added to cart!`);
+    });
+  });
+
+  function updateCartBadge() {
+    const badge = document.getElementById('cartBadge');
+    let total = 0;
+    cart.forEach(item => total += item.price);
+    badge.textContent = `${cart.length} | ₹${total}`;
+  }
+
+  function updateBillTable() {
+    const billTableBody = document.getElementById('billTableBody');
+    const billTotal = document.getElementById('billTotal');
+    const billSection = document.getElementById('billSection');
+
+    billTableBody.innerHTML = '';
+    let total = 0;
+
+    cart.forEach((item, index) => {
+      total += item.price;
+
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${index + 1}</td>
+        <td>${item.name}</td>
+        <td>₹${item.price}</td>
+        <td><button class="btn btn-danger btn-sm" onclick="removeItem(${index})">Remove</button></td>
+      `;
+      billTableBody.appendChild(row);
+    });
+
+    billTotal.innerHTML = `<strong>₹${total}</strong>`;
+    billSection.style.display = cart.length ? 'block' : 'none';
+  }
+
+  function removeItem(index) {
+    cart.splice(index, 1);
+    updateCartBadge();
+    updateBillTable();
+  }
+  document.getElementById('cartButton').addEventListener('click', () => {
+  const billSection = document.getElementById('billSection');
+  if (cart.length > 0) {
+    billSection.scrollIntoView({ behavior: 'smooth' });
+  } else {
+    alert("🛒 Your cart is empty. Add products to view your bill.");
+  }
+});
     window.onload = loadModels;
   </script>
 
