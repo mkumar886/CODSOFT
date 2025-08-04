@@ -567,45 +567,40 @@ window.onload = async () => {
       }
     }
 
-    async function takeSnapshot() {
-      const video = document.getElementById('camera');
-      const canvas = document.getElementById('snapshot');
-      const ctx = canvas.getContext('2d');
+   async function takeSnapshot() {
+  const video = document.getElementById('camera');
+  const canvas = document.getElementById('snapshot');
+  const ctx = canvas.getContext('2d');
 
-      video.style.display = 'none';
+  // Match canvas size to video
+  canvas.width = video.videoWidth;
+  canvas.height = video.videoHeight;
 
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-      canvas.style.display = 'block';
+  // Draw frame
+  ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+  video.style.display = 'none';
+  canvas.style.display = 'block';
 
+  // Detect face and gender
+  const detection = await faceapi
+    .detectSingleFace(canvas, new faceapi.TinyFaceDetectorOptions({ inputSize: 512 }))
+    .withAgeAndGender();
 
-      // Detect face and gender
-      const detection = await faceapi
-        .detectSingleFace(canvas, new faceapi.TinyFaceDetectorOptions({ inputSize: 320 }))
-        .withAgeAndGender();
+  if (!detection) {
+    alert("❌ No face detected. Try again.");
+    await startCamera();
+    return;
+  }
 
-      if (!detection) {
-        alert("❌ No face detected. Try again.");
-        return;
-      }
+  const detectionGender = detection.gender;
+  if (detectionGender === userGender) {
+    showRecommendations(detectionGender);
+  } else {
+    alert("❌ Gender mismatch. Try again.");
+    await startCamera();
+  }
+}
 
-
-      detectionGender = detection.gender;
-      //  const age = Math.round(detection.age);
-      //       const confirmGender = confirm(`Detected: ${userGender}, Age: ${age}. Is this correct?`);
-
-      //       if (!confirmGender) {
-      //         userGender = prompt("Enter your gender (male/female):").toLowerCase();
-      //       }
-      if (detectionGender == userGender) {
-
-        showRecommendations(detectionGender);
-      } else {
-
-                 alert("❌ No face detected. Try again with clear lighting.");
-                  await startCamera(); 
-
-      }
-    }
 
     function showRecommendations(userGender) {
   const womenProducts = ["Matte Lipstick-Glamveda", "Foundation-Glamveda", "Rosy Blush-Skincraft", "Eye Shadow-Skincraft", "Mascara-Dot & Key", "Brush Set-Dot & Key"];
