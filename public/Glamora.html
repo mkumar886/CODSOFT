@@ -112,6 +112,27 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+#buyBtn {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #28a745;
+      color: white;
+      border: none;
+      cursor: pointer;
+     
+    }
+
+    #buyBtn:hover {
+      background-color: #218838;
+    }
+
+    #bill {
+      margin-top: 30px;
+      padding: 20px;
+      border: 2px dashed #444;
+      background-color: #f8f8f8;
+      display: none;
+    }
 
   </style>
 </head>
@@ -318,6 +339,17 @@
             </tr>
           </tfoot>
         </table>
+        
+        <button id="buyBtn">Buy Now</button>
+
+  <!-- Hidden Bill Section -->
+  <div id="bill">
+    <h3>🧾 Bill</h3>
+    <p>Your order placed successfully ✅</p>
+    <p>Thank you for shopping with us!</p>
+  </div>
+       
+  
       </div>
     </div>
 
@@ -737,6 +769,17 @@ function closePopup() {
   }
 });
     window.onload = loadModels;
+ const buyBtn = document.getElementById("buyBtn");
+    const bill = document.getElementById("bill");
+
+    buyBtn.addEventListener("click", () => {
+      // Show the bill
+      bill.style.display = "block";
+
+      // Optional: Disable the button after purchase
+      buyBtn.disabled = true;
+      buyBtn.innerText = "Order Placed";
+    });
   </script>
 
 </body>
